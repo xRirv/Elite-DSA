@@ -1,0 +1,13 @@
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        TreeSet<Integer> hash=new TreeSet<>();
+        //Arrays.sort(arr);
+        for(int i:arr){
+            hash.add(i);
+        }
+        Integer[] arr1=hash.toArray(new Integer[0]);
+        if(hash.size()<2) return -1;
+        return (arr1[hash.size()-2]);
+        
+    }
+}
