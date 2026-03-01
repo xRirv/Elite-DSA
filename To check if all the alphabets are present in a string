@@ -1,0 +1,14 @@
+import java.util.*;
+public class Main {
+    public static void CheckAllAlpha(String str){
+        int flag=0;
+        for(char ch:str.toCharArray()){
+            flag=flag|(1<<(ch-'a'));
+        }
+        if(flag==(1<<26)-1){
+            System.out.print("yes");
+        }else{
+            System.out.print("no");
+        }
+    }
+}
