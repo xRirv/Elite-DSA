@@ -1,0 +1,16 @@
+import java.util.*;
+public class palindromeUsingXOR {
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String str=sc.nextLine();
+        int flag=0;
+        for(char c:str.toCharArray()){
+            flag^=(1<<(c-'a'));
+        }
+        if(flag==0||(flag&(flag-1))==0){
+            System.out.print("yes");
+        }else{
+            System.out.print("no");
+        }
+    }
+}
