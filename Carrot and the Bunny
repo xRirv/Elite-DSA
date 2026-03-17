@@ -1,0 +1,74 @@
+import java.util.*;
+public class Main {
+    static Scanner sc=new Scanner(System.in);
+    public static int bfs(int R, int C, int r, int c, String[][] arr, boolean[][] visited){
+        int rdiff[]={0, 0, -1, 1};
+        int cdiff[]={-1, 1, 0, 0};
+        Queue<ArrayList<Integer>> q=new LinkedList<>();
+        ArrayList<Integer> l1=new ArrayList<>();
+        l1.add(r);
+        l1.add(c);
+        int steps=-1;
+        q.add(l1);
+        visited[r][c]=true;
+        while(!q.isEmpty()){
+            int size = q.size();
+            steps++;
+            for(int s=0;s<size;s++){
+                ArrayList<Integer> l2 = q.poll();
+                r = l2.get(0);
+                c = l2.get(1);
+                for(int itr=0;itr<4;itr++){
+                    int ar = r + rdiff[itr];
+                    int ac = c + cdiff[itr];
+                    if(ar>=0 && ar<R && ac>=0 && ac<C && !visited[ar][ac]){
+                        if(arr[ar][ac].equals("C")){
+                            return steps+1;
+                        }
+                        
+                        if(arr[ar][ac].equals(".")){
+                            ArrayList<Integer> l3=new ArrayList<>();
+                            l3.add(ar);
+                            l3.add(ac);
+                            q.add(l3);
+                            visited[ar][ac]=true;
+                        }
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+    public static void main(String[] args){
+        int R=sc.nextInt();
+        int C=sc.nextInt();
+        sc.nextLine();
+        String arr[][]=new String[R][C];
+        for(int i=0;i<R;i++){
+            arr[i]=sc.nextLine().split(" ");
+        }
+        int stepsA=0;
+        int stepsB=0;
+        boolean visitedA[][]=new boolean[R][C];
+        boolean visitedB[][]=new boolean[R][C];
+        for(int row=0;row<R;row++){
+            for(int col=0;col<C;col++){
+                if(arr[row][col].equals("A")){
+                    stepsA=bfs(R,C, row, col, arr, visitedA);
+                }
+                if(arr[row][col].equals("B")){
+                	stepsB=bfs(R,C, row, col, arr, visitedB);
+                }
+            }
+        }
+        if(stepsA>stepsB){
+        	System.out.print("A");
+        }else if(stepsA<stepsB){
+        	System.out.print("B");
+        }else if(stepsA==stepsB){
+        	System.out.print("AB");
+        }else{
+        	System.out.print("null");
+        }
+    }
+}
