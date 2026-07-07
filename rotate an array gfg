@@ -1,0 +1,18 @@
+class Solution {
+    static void reverse(int arr[], int l, int r){
+        while(r>l){
+            int temp=arr[l];
+            arr[l]=arr[r];
+            arr[r]=temp;
+            r--;
+            l++;
+        }
+    }
+    static void rotateArr(int arr[], int d) {
+        int n=arr.length, mod=d%n;
+        reverse(arr,0,mod-1);
+        reverse(arr,mod,n-1);
+        reverse(arr, 0, n-1);
+        
+    }
+}
