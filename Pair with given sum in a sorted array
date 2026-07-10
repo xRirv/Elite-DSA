@@ -1,0 +1,35 @@
+class Solution {
+
+    int countPairs(int arr[], int target) {
+        Arrays.sort(arr);
+        int count=0;
+        int l=0, r=arr.length-1;
+        while(r>l){
+            if(arr[l]+arr[r]<target){
+                l++;
+            }else if(arr[l]+arr[r]>target){
+                r--;
+            }else{
+                if(arr[l]==arr[r]){
+                    int n=r-l+1;
+                    count+=(n*(n-1))/2;
+                    break;
+                }
+                int e1=arr[l];
+                int c1=0;
+                while(l<=r&&arr[l]==e1){
+                    c1++;
+                    l++;
+                }
+                int e2=arr[r];
+                int c2=0;
+                while(r>=l&&arr[r]==e2){
+                    c2++;
+                    r--;
+                }
+                count+=c1*c2;
+            }
+        }
+        return count;
+    }
+}
