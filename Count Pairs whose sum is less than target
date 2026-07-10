@@ -1,0 +1,16 @@
+class Solution {
+    int countPairs(int arr[], int target) {
+        int count=0;
+        Arrays.sort(arr);
+        int l=0, r=arr.length-1;
+        while(r>l){
+            if(arr[l]+arr[r]<target){
+                count+=(r-l);
+                l++;
+            }else{
+                r--;
+            }
+        }
+        return count;
+    }
+}
