@@ -1,0 +1,19 @@
+class Solution {
+    ArrayList<Integer> countDistinct(int arr[], int k) {
+        ArrayList<Integer> l1=new ArrayList<>();
+        HashMap<Integer, Integer> hash=new HashMap<>();
+        for(int i=0;i<k;i++){
+            hash.put(arr[i],hash.getOrDefault(arr[i],0)+1);
+        }
+        l1.add(hash.size());
+        for(int i=k;i<arr.length;i++){
+            hash.put(arr[i], hash.getOrDefault(arr[i],0)+1);
+            hash.put(arr[i-k], hash.getOrDefault(arr[i-k],0)-1);
+            if(hash.get(arr[i-k])==0){
+                hash.remove(arr[i-k]);
+            }
+            l1.add(hash.size());
+        }
+        return l1;
+    }
+}
