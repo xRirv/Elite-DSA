@@ -1,0 +1,20 @@
+class Solution {
+    public int longestUniqueSubstr(String s) {
+        Queue<Character> q=new LinkedList<>();
+        int l=0;
+        int max=0;
+        int r=0;
+        char arr[]=s.toCharArray();
+        while(r<s.length()){
+            if(!q.contains(arr[r])){
+                q.add(arr[r]);
+                r++;
+            }else{
+                l++;
+                q.remove();
+            }
+            max=Math.max(q.size(), max);
+        }
+        return max;
+    }
+}
