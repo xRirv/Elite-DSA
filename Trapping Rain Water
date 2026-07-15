@@ -1,0 +1,22 @@
+class Solution {
+    public int maxWater(int arr[]) {
+        int lmax=arr[0];
+        int rmax=arr[arr.length-1];
+        int l=1;
+        int result=0;
+        int r=arr.length-2;
+        while(r>=l){
+            if(rmax>=lmax){
+                result+=Math.max(0,lmax-arr[l]);
+                lmax=Math.max(lmax, arr[l]);
+                l++;
+            }else{
+                result+=Math.max(0, rmax-arr[r]);
+                rmax=Math.max(rmax, arr[r]);
+                r--;
+            }
+        }
+        return result;
+        
+    }
+}
