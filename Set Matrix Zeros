@@ -1,0 +1,25 @@
+class Solution {
+    public void setMatrixZeroes(int[][] mat) {
+        int R=mat.length;
+        int C=mat[0].length;
+        boolean visited[][]=new boolean[R][C];
+        for(int i=0;i<R;i++){
+            for(int j=0;j<C;j++){
+                if(mat[i][j]==0){
+                    visited[i][j]=true;
+                    }
+                }
+            }
+        for(int i=0;i<R;i++){
+            for(int j=0;j<C;j++){
+                if(visited[i][j]==true){
+                    for(int k=0;k<C;k++){
+                        mat[i][k]=0;
+                    }
+                    for(int k=0;k<R;k++){
+                        mat[k][j]=0;
+                }
+            }
+        }
+    }
+}}
