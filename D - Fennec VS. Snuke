@@ -1,0 +1,60 @@
+import java.util.*;
+
+public class Main {
+	public static void bfs(int start, Map<Integer, List<Integer>> graph, int[] arr, boolean[] visited){
+			Queue<Integer> q=new LinkedList<>();
+			q.add(start);
+			int distance=0;
+			visited[start]=true;
+			while(!q.isEmpty()){
+				int node=q.poll();
+				List<Integer> nodes=new ArrayList<>();
+				nodes=graph.get(node);
+				//distance++;
+				for(int i=0;i<nodes.size();i++){
+					int num=nodes.get(i);
+					if(!visited[num]){
+						arr[num]=distance+1;
+						visited[num]=true;
+						q.add(num);
+					}
+				}
+				distance++;
+			}	
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N=sc.nextInt();
+		Map<Integer, List<Integer>> graph=new HashMap<>();
+		for(int i=0;i<N-1;i++){
+			int source=sc.nextInt();
+			int destination=sc.nextInt();
+			graph.putIfAbsent(source, new ArrayList<>());
+			graph.putIfAbsent(destination, new ArrayList<>());
+			graph.get(source).add(destination);
+			graph.get(destination).add(source);
+		}
+		int white[]=new int[N+1];
+		int black[]=new int[N+1];
+		boolean visitedW[]=new boolean[N+1];
+		boolean visitedB[]=new boolean[N+1];
+		bfs(1, graph, white, visitedW);
+		bfs(N, graph, black, visitedB);
+		int colours[]=new int[N+1];
+		Arrays.fill(colours, 1);
+		int Wcount=N;
+		int Bcount=0;
+		for(int i=1;i<=N;i++){
+			if(white[i]>black[i]){
+				colours[i]=2;
+				Bcount++;
+				Wcount--;
+			}
+		}
+		if(Wcount>Bcount){
+			System.out.println("Fennec");
+		}else{
+			System.out.println("Snuke");
+		}
+	}
+}
